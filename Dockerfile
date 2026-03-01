@@ -5,20 +5,24 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# On clone le noyau original
 RUN git clone https://github.com/Ainz-devs/OVL-MD-V2.git /ovl_bot
 WORKDIR /ovl_bot
 
-# Injection de ton nom et de Sakura 🌸🌸
-RUN sed -i 's/ᴀɪɴᴢ/ᴛʜᴇ_ᴅᴀʀᴋ/g' config.js || true
-RUN sed -i 's/ᴏᴠʟ-ᴍᴅ-ᴠ𝟸/sᴀᴋᴜʀᴀ🌸🌸/g' config.js || true
+# --- CHIRURGIE DE L'IDENTITÉ ---
+# On remplace le numéro du créateur, le nom du bot et du proprio dans le config.js
+RUN sed -i "s/OWNER_NUMBER = '923092213197'/OWNER_NUMBER = '0100268983'/g" config.js
+RUN sed -i "s/botname = 'OVL-MD-V2'/botname = 'Sakura 🌸🌸'/g" config.js
+RUN sed -i "s/ownername = 'ᴀɪɴᴢ'/ownername = 'THE_DARK'/g" config.js
 
+# Installation des dépendances et de PM2 pour la survie H24
 RUN npm install && npm install pm2 -g
 
-# --- LA LIGNE QUE TU AS RATÉE ---
-# Vérifie bien l'espace entre plugins/ et ||
+# --- ABSORPTION DE TES PLUGINS ---
+# On s'assure que TON dossier plugins écrase ou s'ajoute à celui du bot
 COPY plugins/ ./plugins/
 
 EXPOSE 8000
 
-# Démarrage via le script officiel du bot
+# Démarrage impérial
 CMD ["pm2-runtime", "npm", "--", "start"]
