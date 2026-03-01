@@ -9,6 +9,9 @@ RUN git clone https://github.com/Ainz-devs/OVL-MD-V2.git /ovl_bot
 
 WORKDIR /ovl_bot
 
+RUN sed -i 's/ᴀɪɴᴢ/ᴛʜᴇ_ᴅᴀʀᴋ/g' config.js || true
+RUN sed -i 's/ᴏᴠʟ-ᴍᴅ-ᴠ𝟸/sᴀᴋᴜʀᴀ🌸🌸/g' config.js || true
+
 RUN npm install
 
 EXPOSE 8000
